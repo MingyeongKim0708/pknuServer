@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container my-3">
+    <form method = "POST" class = "post-form" action = "{% url 'common:login' %}">
+        {% csrf_token %} <!--보안-->
+
+        {% include "form_errors.html" %}
+
+        <div class = "form-group">
+            <label for = "username">사용자 ID</label>
+            <input type = "text" class = "form-control" name = "username" id = "username" value = "{{form.username.value|default_if_none:''}}">
+        </div>
+
+        <div class = "form-group">
+            <label for = "password">비밀번호</label>
+            <input type = "password" class = "form-control" name = "password" id = "password" value = "{{form.password.value|default_if_none:''}}">
+        </div>
+
+        <!--{{form.as_p}}--> <!--view에서 생성한 폼 객체를 가져오는 것. 이 폼을 p태그 안에 배치하겠다.-->
+        <button type = "submit" class = "btn btn-primary">로그인</button>
+        <!--submit버튼 : action이 없는 경우 자기 자신의 페이지를 호출한다.-->
+    </form>
+</div>
+{% endblock %}

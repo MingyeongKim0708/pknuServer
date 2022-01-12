@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container my-3">
+    <form method = "POST" class = "post-form">
+        {% csrf_token %} <!--보안-->
+        {% include "form_errors.html" %}
+
+        <div class = "form-group">
+            <label for = "content">답변내용</label>
+            <textarea class = "form-control" name = "content" id = "content" row="10">{{form.content.value|default_if_none:''}}</textarea>
+        </div>
+
+        <!--{{form.as_p}}--> <!--view에서 생성한 폼 객체를 가져오는 것. 이 폼을 p태그 안에 배치하겠다.-->
+        <button type = "submit" class = "btn btn-primary">저장하기</button>
+        <!--submit버튼 : action이 없는 경우 자기 자신의 페이지를 호출한다.-->
+    </form>
+</div>
+{% endblock %}
